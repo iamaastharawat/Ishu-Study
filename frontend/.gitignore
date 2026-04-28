@@ -1,0 +1,51 @@
+# =========================
+# Frontend / Next.js
+# =========================
+node_modules/
+.next/
+dist/
+build/
+
+# v0 runtime files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# =========================
+# Python Backend
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Uploads (optional if large/generated)
+uploads/
+
+# =========================
+# IDE Files
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
