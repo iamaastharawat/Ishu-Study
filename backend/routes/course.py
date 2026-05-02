@@ -276,3 +276,27 @@ async def generate_course(
             "status": "failed",
             "error": str(e)
         })
+    # ── DELETE COURSE/JOB ────────────────────────────────────────────────
+
+@router.delete("/course/{job_id}")
+async def delete_course(
+    job_id: str,
+    session: AsyncSession = Depends(get_db_session),
+):
+    """Delete a course/job from the database."""
+
+    job = await session.get(JobRecord, job_id)
+
+    if not job:
+        return JSONResponse(
+            status_code=404,
+            content={"error": "Job not found"}
+        )
+
+    await session.delete(job)
+    await session.commit()
+
+    return JSONResponse(content={
+        "success": True,
+        "jobId": job_id
+    })

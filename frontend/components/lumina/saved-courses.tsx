@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Play, Clock, Library, Loader2, AlertCircle } from 'lucide-react'
+import { Play, Clock, Library, Loader2, AlertCircle, Trash2 } from 'lucide-react'
 import { getJobHistory } from '@/lib/api'
 import { useCourseStore } from '@/lib/store'
 
@@ -23,7 +23,25 @@ export function SavedCourses() {
             setIsLoading(false)
         }
     }, [])
+    
+    const handleDelete = async (
+    jobId: string,
+    e: React.MouseEvent
+) => {
+    e.stopPropagation()
 
+    try {
+        await fetch(`http://localhost:8000/api/course/${jobId}`, {
+            method: 'DELETE',
+        })
+
+        setJobs((prev) =>
+            prev.filter((job) => job.jobId !== jobId)
+        )
+    } catch (err) {
+        console.error('Failed to delete job:', err)
+    }
+}
     useEffect(() => {
         fetchJobs()
 
@@ -111,7 +129,12 @@ export function SavedCourses() {
                                     </div>
                                 )}
                             </div>
-
+<button
+    onClick={(e) => handleDelete(job.jobId, e)}
+    className="absolute top-4 right-4 z-10 text-red-400 hover:text-red-300 transition-colors"
+>
+    <Trash2 className="w-4 h-4" />
+</button>
                             <div className="absolute bottom-4 right-4 flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary opacity-0 group-hover:opacity-100 transition-all hover:bg-primary/40 hover:scale-110">
                                 <Play className="w-4 h-4 ml-0.5" />
                             </div>
