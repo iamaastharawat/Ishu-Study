@@ -128,12 +128,13 @@ export default function LandingPage() {
               {/* 🔥 INPUT SECTION */}
               {inputType === 'youtube' ? (
                 <VanishInput
-                  placeholders={[
-                    'Paste YouTube lecture...',
-                    'https://youtube.com/...',
-                  ]}
-                  onSubmit={(value) => setYoutubeUrl(value)}
-                />
+  placeholders={[
+    'Paste YouTube lecture...',
+    'https://youtube.com/...',
+  ]}
+  onSubmit={(value) => setYoutubeUrl(value)}
+  onChange={(value) => setYoutubeUrl(value)}
+/>
               ) : (
                 <UploadDropzone
                   onFileSelect={(f) => {

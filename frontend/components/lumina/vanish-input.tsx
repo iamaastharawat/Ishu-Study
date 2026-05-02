@@ -6,9 +6,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 interface VanishInputProps {
   placeholders: string[]
   onSubmit: (value: string) => void
+  onChange?: (value: string) => void
 }
 
-export function VanishInput({ placeholders, onSubmit }: VanishInputProps) {
+export function VanishInput({
+  placeholders,
+  onSubmit,
+  onChange,
+}: VanishInputProps) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0)
   const [value, setValue] = useState('')
   const [isAnimating, setIsAnimating] = useState(false)
@@ -45,7 +50,10 @@ export function VanishInput({ placeholders, onSubmit }: VanishInputProps) {
           ref={inputRef}
           type="text"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+  setValue(e.target.value)
+  onChange?.(e.target.value)
+}}
           onKeyDown={(e) => {
             if (e.key === 'Enter') handleSubmit()
           }}

@@ -167,7 +167,7 @@ async def analyze_with_transcript(transcript: str, video_info: dict[str, Any]) -
 
     full_prompt = context_header + ANALYSIS_PROMPT
 
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    model = genai.GenerativeModel("gemini-flash-lite-latest")
 
     try:
         loop = asyncio.get_event_loop()
@@ -235,7 +235,7 @@ async def _wait_for_active(uploaded_file: Any, timeout: int = 300, poll_interval
 
 async def _send_analysis_request(uploaded_file: Any) -> str:
     """Send the uploaded file and prompt to Gemini, return the raw response text."""
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    model = genai.GenerativeModel("gemini-flash-lite-latest")
 
     # Run blocking generate_content in thread pool
     loop = asyncio.get_event_loop()
@@ -426,7 +426,7 @@ async def analyze_text_content(
 
     full_prompt = context_header + ANALYSIS_PROMPT
 
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    model = genai.GenerativeModel("gemini-flash-lite-latest")
 
     try:
         loop = asyncio.get_event_loop()

@@ -44,7 +44,7 @@ const STEP_MAP: Record<string, number> = {
 
 export function ProcessingState({ videoTitle, jobId, onComplete }: ProcessingStateProps) {
   const [steps, setSteps] = useState<ProcessingStep[]>([
-    { id: 'download', label: 'Downloading video', icon: <Download className="h-4 w-4" />, status: 'active' },
+    { id: 'download', label: 'Downloading', icon: <Download className="h-4 w-4" />, status: 'active' },
     { id: 'analyze', label: 'Analyzing content', icon: <Brain className="h-4 w-4" />, status: 'pending' },
     { id: 'generate', label: 'Generating course', icon: <Sparkles className="h-4 w-4" />, status: 'pending' },
     { id: 'complete', label: 'Finalizing', icon: <CircleCheck className="h-4 w-4" />, status: 'pending' },
