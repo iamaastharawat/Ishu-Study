@@ -11,6 +11,7 @@ export function SavedCourses() {
     const router = useRouter()
     const [jobs, setJobs] = useState<any[]>([])
     const [isLoading, setIsLoading] = useState(true)
+    const [tests, setTests] = useState<any[]>([])
     const savedCourses = useCourseStore((state) => state.savedCourses)
 
     const fetchJobs = useCallback(async () => {
@@ -43,6 +44,11 @@ export function SavedCourses() {
     }
 }
     useEffect(() => {
+        const savedTests = JSON.parse(
+    localStorage.getItem('lumina-tests') || '[]'
+)
+
+setTests(savedTests)
         fetchJobs()
 
         // Auto-refresh the list every 5 seconds to catch ongoing jobs
@@ -67,6 +73,27 @@ export function SavedCourses() {
                     const isComplete = job.status === 'completed'
 
                     const title = job.videoTitle || 'Processing Video...'
+                    const matchingTest = tests.find((test) =>
+    title.toLowerCase().includes(
+        test.topic.toLowerCase().trim()
+    )
+)
+
+const daysLeft = matchingTest
+    ? Math.ceil(
+          (new Date(matchingTest.date).getTime() - Date.now()) /
+              (1000 * 60 * 60 * 24)
+      )
+    : null
+
+       const urgencyClass =
+    daysLeft !== null
+        ? daysLeft <= 2
+            ? 'border-red-500 bg-red-500/10 shadow-red-500/20'
+            : daysLeft <= 7
+            ? 'border-orange-500 bg-orange-500/10 shadow-orange-500/20'
+            : 'border-cyan-500 bg-cyan-500/10 shadow-cyan-500/20'
+        : 'border-border/50 bg-secondary/30'
                     const conceptCount = job.course?.concepts?.length || 0
 
                     return (
@@ -76,12 +103,25 @@ export function SavedCourses() {
                             animate={{ opacity: 1, y: 0 }}
                             whileHover={{ y: -2 }}
                             onClick={() => router.push(`/course/${job.jobId}`)}
-                            className={`group relative flex flex-col gap-3 rounded-2xl border border-border/50 bg-secondary/30 p-5 transition-all cursor-pointer hover:bg-secondary/50 hover:border-border`}
+                            className={`group relative flex flex-col gap-3 rounded-2xl border p-5 transition-all cursor-pointer hover:bg-secondary/50 hover:border-border shadow-lg ${urgencyClass}`}
                         >
                             <div className="flex justify-between items-start gap-4">
                                 <h3 className="font-semibold text-foreground line-clamp-2">
                                     {title}
                                 </h3>
+                                {matchingTest && (
+    <div
+        className={`mt-2 inline-flex w-fit items-center rounded-full px-2 py-1 text-xs font-medium ${
+            daysLeft !== null && daysLeft <= 2
+                ? 'bg-red-500/20 text-red-300'
+                : daysLeft !== null && daysLeft <= 7
+                ? 'bg-orange-500/20 text-orange-300'
+                : 'bg-cyan-500/20 text-cyan-300'
+        }`}
+    >
+        📅 Test in {daysLeft} day{daysLeft !== 1 ? 's' : ''}
+    </div>
+)}
                             </div>
 
                             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground mt-auto">

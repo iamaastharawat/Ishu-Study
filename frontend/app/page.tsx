@@ -23,7 +23,8 @@ export default function LandingPage() {
   const [youtubeUrl, setYoutubeUrl] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [inputType, setInputType] = useState<'youtube' | 'pdf' | 'image'>('youtube')
-
+  const [testTopic, setTestTopic] = useState('')
+  const [testDate, setTestDate] = useState('')
   // 🔥 UNIVERSAL SUBMIT FUNCTION
   const handleSubmit = useCallback(async () => {
     setError(null)
@@ -75,6 +76,30 @@ export default function LandingPage() {
     },
     [router]
   )
+
+  const handleAddTest = () => {
+  if (!testTopic || !testDate) return
+
+  const existingTests = JSON.parse(
+    localStorage.getItem('lumina-tests') || '[]'
+  )
+
+  const updatedTests = [
+    ...existingTests,
+    {
+      topic: testTopic,
+      date: testDate,
+    },
+  ]
+
+  localStorage.setItem(
+    'lumina-tests',
+    JSON.stringify(updatedTests)
+  )
+
+  setTestTopic('')
+  setTestDate('')
+}
 
   return (
     <div className="relative flex min-h-screen flex-col items-center">
@@ -150,10 +175,47 @@ export default function LandingPage() {
               >
                 Generate Course
               </button>
-
-              {/* Features */}
+ 
               <div className="w-full">
                 <FeatureCards />
+
+                {/* 📅 Upcoming Test Widget */}
+<div className="mt-10 w-full rounded-2xl border border-border/50 bg-secondary/30 p-5 backdrop-blur-sm">
+  <div className="flex items-start justify-between gap-4">
+    <div>
+      <h3 className="text-lg font-semibold text-foreground">
+        📅 Got an upcoming test?
+      </h3>
+
+      <p className="mt-1 text-sm text-muted-foreground">
+        Add your topic and test date — Lumina will prioritize related courses automatically.
+      </p>
+    </div>
+  </div>
+
+  <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+    <input
+      value={testTopic}
+      onChange={(e) => setTestTopic(e.target.value)}
+      placeholder="Enter topic (e.g. DBMS, OS, CN)"
+      className="flex-1 rounded-xl border border-border bg-background/80 px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
+    />
+
+    <input
+      type="date"
+      value={testDate}
+      onChange={(e) => setTestDate(e.target.value)}
+      className="rounded-xl border border-border bg-background/80 px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
+    />
+
+    <button
+      onClick={handleAddTest}
+      className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 px-5 py-3 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
+    >
+      Add Test
+    </button>
+  </div>
+</div>
                 <SavedCourses />
               </div>
             </motion.div>
