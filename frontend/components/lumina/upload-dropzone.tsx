@@ -96,10 +96,10 @@ export function UploadDropzone({ onFileSelect }: UploadDropzoneProps) {
             </motion.div>
             <div className="text-center">
               <p className="text-sm font-medium text-foreground">
-                Drop your lecture video here
+                Drop your lecture content here
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                MP4, WebM, MOV up to 500MB
+                MP4, WebM, PDF,img, MOV up to 500MB
               </p>
             </div>
             <input
