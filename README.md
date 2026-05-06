@@ -1,12 +1,7 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/yashbharvada/lumina/main/public/logo.png" alt="Lumina Logo" width="120" />
-  
   # 🌟 Lumina
   
-  **"Turn any 2-hour lecture into a 20-minute interactive study session"**
-  
-  [![Hackathon Submission](https://img.shields.io/badge/🏆_PIXEL.GEMINI-Submission-FFcc00?style=for-the-badge)](https://pixel-gemini.devpost.com)
-  
+  **"Turn any lecture  content into a 20-minute interactive study session"**
   ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)
   ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
   ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -17,10 +12,6 @@
 </div>
 
 <br/>
-
-> **🏆 Hackathon Submission Notice**<br>
-> This project is proudly submitted for the **PIXEL.GEMINI Hackathon**. Lumina extensively utilizes the **Google Gemini API** (specifically `gemini-3.0-flash`) for multimodal video analysis, transcript ingestion, and fully structured educational JSON generation.
-
 
 
 ## 💡 The Problem
@@ -41,20 +32,18 @@ Students worldwide waste hours watching lengthy lecture recordings and reading d
 
 Lumina completely transforms the educational pipeline: **2-hour lecture $\rightarrow$ 20-minute interactive study session.**
 
-1. **Intelligent Extraction:** Lumina analyzes the ENTIRE video — its visual content, audio speech, slides, and diagrams.
-2. **Structural Mapping:** It extracts hierarchical concept structures and builds rigid prerequisite mappings between disparate topics.
-3. **Interactive Visualization:** We turn linear video into a beautiful, personalized 3D skill tree.
-4. **Active Recall:** Lumina auto-creates categorized flashcards (definitions, examples, comparisons, applications, mnemonics) entirely based on the video context.
-5. **Adaptive Assessment:** It builds adaptive quizzes with varying difficulties and highly detailed explanations.
-6. **Gamified Progress:** As you study, your 3D skill tree dynamically updates from a grey "unstarted" state, to a gold "in-progress" state, finally turning bright green upon 100% mastery.
+1. **Intelligent Extraction:** Lumina analyzes the ENTIRE content — videos, handwritten notes, PDFs, slides, diagrams, and audio.
+2. **Structural Mapping:** It extracts hierarchical concept structures and builds prerequisite relationships between topics.
+3. **Interactive Visualization:** Linear content is transformed into a beautiful personalized 3D skill tree.
+4. **Active Recall:** Lumina auto-generates categorized flashcards (definitions, examples, comparisons, applications, mnemonics).
+5. **Adaptive Assessment:** Dynamic quizzes are generated with varying difficulty levels and AI-generated explanations.
+6. **Gamified Progress:** Your skill tree visually evolves from unstarted → in-progress → mastered.
+7. **Smart Study Planning:** Users can add upcoming test topics and deadlines directly from the homepage.
+8. **Prioritization:** Lumina intelligently highlights relevant courses based on topic similarity and urgency.
+9. **Dynamic Library Management (NEW):** Users can track processing states and remove unwanted courses directly from the interface.
 
 ---
-
-## 🧠 How I Use the Google Gemini API
-
-*(Judges: This section details our deep integration with Gemini capabilities as outlined in the hackathon rules.)*
-
-We utilized **Gemini 3.0 Flash** (`gemini-3.0-flash`) as the core brain of Lumina. We didn't just build a wrapper—we deeply integrated Gemini's native multimodal processing to achieve something standard LLMs cannot do. It was the *only* model capable of simultaneously handling our required 2M+ token long context window, native multimodal input processing (video frames + audio synchronously), and heavily constrained structured JSON outputs via `response_schema`.
+ **Gemini Flash lite latest** (`gemini-flash-lite-latest`) as the core brain of Lumina. We didn't just build a wrapper—we deeply integrated Gemini's native multimodal processing to achieve something standard LLMs cannot do. It was the *only* model capable of simultaneously handling our required 2M+ token long context window, native multimodal input processing (video frames + audio synchronously), and heavily constrained structured JSON outputs via `response_schema`.
 
 ### 1. NATIVE Multimodal Video Analysis via `File API`
 Instead of relying solely on error-prone YouTube transcripts (a standard, low-innovation approach), Lumina interfaces directly with the Gemini File API to upload raw lecture videos. We use `genai.upload_file()` to push videos into Gemini's secure servers. This allows the model to process BOTH the **visual frames** (slides, mathematical diagrams written on whiteboards, presenter gestures) AND the **audio** (spoken explanations, emphasis, Q&A) simultaneously, mimicking true human understanding.
@@ -103,17 +92,94 @@ To ensure data privacy and prevent storage quota limits from being hit on the Go
 
 ## 🎮 Key Features
 
-1. **🎬 Universal Video Ingestion**: Paste any YouTube URL or upload a direct video file.
-2. **🧠 Full Multimodal Analysis**: Powered by Gemini 3.0 Flash to "watch" and "listen" to lectures rather than just reading text.
-3. **🌳 3D Physics Skill Tree**: An interactive `@react-three/fiber` graph mapping prerequisites in 3D space with zoom, pan, and orbital controls—a completely novel way to visualize AI output.
-4. **🃏 Swipeable Flashcard Engine**: Physics-based 3D card stacks categorizing active recall by Definition, Examples, Mnemonics, and Applications.
-5. **🧩 Gamified Adaptive Quizzes**: Questions scale in difficulty, providing detailed AI-generated explanations for both correct and incorrect answers.
-6. **📊 Real-time Mastery Tracking**: Nodes in the 3D visualizer react physically, glowing gold and green as you complete quizzes.
-7. **⏱️ Source Timestamp Mapping**: Jump straight into the exact minute of the video a concept was taught.
-8. **🎯 Prerequisite-Aware Paths**: You cannot learn Level 3 concepts without proving mastery in Level 1 and 2 concepts.
-9. **💾 Persistent Local Database**: Progress is saved via `localStorage` and background jobs are queued in async SQLite (`aiosqlite`).
-10. **⚡ Asynchronous Background Processing**: A completely detached Python worker architecture ensures the UI remains snappy while Gemini crunches data.
+### 🧠 AI-Powered Learning
 
+1. **🎬 Universal Content Ingestion**
+   - YouTube URLs
+   - Video uploads
+   - PDFs
+   - Handwritten notes
+   - Images
+
+2. **🧠 Native Multimodal Analysis**
+   Gemini 3.0 Flash processes:
+   - visual frames
+   - diagrams
+   - slides
+   - handwriting
+   - spoken explanations
+
+3. **🌳 Interactive 3D Skill Tree**
+   Personalized prerequisite-aware concept visualization powered by Three.js.
+
+4. **🃏 Smart Flashcard Engine**
+   Auto-generated categorized flashcards:
+   - Definitions
+   - Examples
+   - Comparisons
+   - Applications
+   - Mnemonics
+
+5. **🧩 Adaptive Quiz Generation**
+   AI-generated quizzes with:
+   - multiple difficulty levels
+   - explanations
+   - mastery-based progression
+
+---
+
+### 📅 Smart Study Planning
+
+6. **📅 Upcoming Test Planner**
+   Add upcoming tests directly from the homepage.
+
+7. **🧠 Semantic Topic Matching**
+   Lumina intelligently identifies related courses using:
+   - titles
+   - concepts
+   - alias matching
+
+8. **🔥 Priority-Based Highlighting**
+   Courses dynamically highlight based on urgency:
+   - 🔴 urgent
+   - 🟠 upcoming
+   - 🔵 lower priority
+
+9. **⚡ Intelligent Prioritization**
+   Most relevant and urgent courses automatically surface first.
+
+---
+
+### ⚙️ Platform Features
+
+10. **📚 Smart Course Library**
+    Displays:
+    - generated courses
+    - processing states
+    - progress
+    - mastery
+
+11. **⚡ Real-Time Processing UI**
+    Users see:
+    - Downloading
+    - Analyzing
+    - Generating
+    - Finalizing
+
+12. **🗑️ Course Management**
+    Delete incomplete or unwanted courses directly from the UI.
+
+13. **📊 Real-Time Mastery Tracking**
+    Interactive node progression using visual feedback.
+
+14. **⏱️ Timestamp Navigation**
+    Jump directly to exact learning segments.
+
+15. **💾 Persistent Storage**
+    SQLite + local persistence.
+
+16. **🐳 Full Dockerized Deployment**
+    Complete frontend/backend containerized architecture.
 ---
 
 ## 🏗️ Architecture
@@ -121,130 +187,325 @@ To ensure data privacy and prevent storage quota limits from being hit on the Go
 ```text
 User
   │
-  ├── YouTube URL ──┐
-  │                 │
-  └── Video Upload ─┤
-                    ▼
-            ┌──────────────┐
-            │   Next.js    │  ◄── 3D Skill Tree (Three.js)
-            │   Frontend   │  ◄── Card Stack (Framer Motion)
-            │   (Vercel)   │  ◄── Zustand State Bridge
-            └──────┬───────┘
-                   │ REST API
-                   ▼
-            ┌──────────────┐
-            │   FastAPI    │  ◄── Async Background Tasks
-            │   Backend    │  ◄── aiosqlite persistent jobs
-            │              │  ◄── yt-dlp Video/Transcript Fetch
-            └──────┬───────┘
-                   │
-          ┌────────┴────────┐
-          ▼                 ▼
-    ┌──────────┐      ┌────────────┐
-    │  yt-dlp  │      │ Gemini 3.0 │
-    │ Transcript      │   Flash    │
-    │  Engine  │      │ Multimodal │
-    └──────────┘      │  Analysis  │
-                      └─────┬──────┘
-                            │
-                            ▼
-                    ┌──────────────┐
-                    │  Structured  │
-                    │    Course    │
-                    │   Module     │
-                    │              │
-                    │ • Concepts   │
-                    │ • Flashcards │
-                    │ • Quizzes    │
-                    │ • Skill Tree │
-                    └──────────────┘
+  ├── YouTube URL ───────────────┐
+  │                              │
+  ├── Video Upload ──────────────┤
+  │                              │
+  ├── PDF Notes Upload ──────────┤
+  │                              │
+  └── Handwritten Notes/Image ───┘
+                                 ▼
+                        ┌──────────────────┐
+                        │     Next.js      │
+                        │     Frontend     │
+                        │                  │
+                        │ ◄── 3D Skill Tree (Three.js)
+                        │ ◄── Flashcards UI (Framer Motion)
+                        │ ◄── Upcoming Test Planner
+                        │ ◄── Semantic Highlighting
+                        │ ◄── Smart Course Library
+                        │ ◄── Zustand State Bridge
+                        │ ◄── Real-Time Processing UI
+                        └────────┬─────────┘
+                                 │ REST API
+                                 ▼
+                        ┌──────────────────┐
+                        │     FastAPI      │
+                        │     Backend      │
+                        │                  │
+                        │ ◄── Async Background Jobs
+                        │ ◄── SQLite Persistent Storage
+                        │ ◄── OCR Processing Pipeline
+                        │ ◄── Semantic Matching Engine
+                        │ ◄── Course Priority Engine
+                        │ ◄── yt-dlp Video Extraction
+                        └────────┬─────────┘
+                                 │
+               ┌─────────────────┼─────────────────┐
+               ▼                 ▼                 ▼
+       ┌────────────┐    ┌──────────────┐   ┌────────────┐
+       │   yt-dlp   │    │   EasyOCR    │   │ Gemini 3.0 │
+       │ Transcript │    │ Handwriting  │   │   Flash    │
+       │ & Video    │    │ Extraction   │   │ Multimodal │
+       │ Extraction │    └──────────────┘   │  Analysis  │
+       └────────────┘                       └─────┬──────┘
+                                                  │
+                                                  ▼
+                                      ┌────────────────────┐
+                                      │ Structured Course  │
+                                      │     Generation     │
+                                      │                    │
+                                      │ • Concepts         │
+                                      │ • Flashcards       │
+                                      │ • Quizzes          │
+                                      │ • Skill Tree       │
+                                      │ • Semantic Tags    │
+                                      │ • Timestamp Links  │
+                                      │ • Mastery Tracking │
+                                      └─────────┬──────────┘
+                                                │
+                                                ▼
+                                   ┌────────────────────────┐
+                                   │ Smart Study Planner    │
+                                   │                        │
+                                   │ • Upcoming Tests       │
+                                   │ • Semantic Matching    │
+                                   │ • Priority Highlighting│
+                                   │ • Deadline Awareness   │
+                                   └────────────────────────┘
+
+                   ┌────────────────────────────────────┐
+                   │     Dockerized Infrastructure      │
+                   │                                    │
+                   │ • Frontend Container               │
+                   │ • Backend Container                │
+                   │ • Environment Isolation            │
+                   │ • Persistent Volumes               │
+                   └────────────────────────────────────┘
 ```
 
 ---
 
 ## 🛠️ Tech Stack
 
+## 🛠️ Tech Stack
+
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
 | **Frontend Framework** | Next.js 14, React 18 | App Router architecture, Server & Client components |
-| **3D Rendering** | Three.js, React Three Fiber | Real-time WebGL rendering of the physics-based Skill Tree |
-| **Styling & UI** | Tailwind CSS, shadcn/ui | Rapid, accessible component styling |
-| **Animations** | Framer Motion | Fluid route transitions and swipeable flashcard physics |
-| **State Management** | Zustand | Bridging complex DOM state with the Three.js canvas |
+| **Language** | TypeScript | Type-safe frontend development |
+| **3D Rendering** | Three.js, React Three Fiber | Real-time WebGL rendering of the interactive Skill Tree |
+| **Styling & UI** | Tailwind CSS, shadcn/ui | Modern responsive UI system |
+| **Animations** | Framer Motion | Fluid transitions, motion effects, and interactive flashcards |
+| **State Management** | Zustand | Global state management and mastery synchronization |
 | **Backend Framework** | FastAPI (Python) | High-performance async API routing and background tasks |
-| **AI Processing** | Google Generative AI SDK | Hooking into Gemini 3.0 Flash for Native Multimodal generation |
-| **Video Extraction** | yt-dlp | Downloading YouTube audio, video, and transcripts |
-| **Data Validation** | Pydantic v2 | Strictly enforcing AI JSON schemas |
-| **Database** | SQLite & SQLAlchemy | `aiosqlite` for persistent background job tracking |
+| **AI Processing** | Google Gemini 3.0 Flash | Native multimodal AI analysis and structured course generation |
+| **OCR Engine** | EasyOCR | Handwritten notes and image text extraction |
+| **Video & Transcript Extraction** | yt-dlp | Downloading YouTube videos, audio, and transcripts |
+| **Schema Validation** | Pydantic v2 | Strict AI JSON validation and structured outputs |
+| **Database ORM** | SQLAlchemy | Database abstraction and ORM handling |
+| **Database** | SQLite + aiosqlite | Persistent job tracking and course storage |
+| **API Communication** | REST API | Frontend ↔ Backend communication |
+| **Containerization** | Docker & Docker Compose | Full-stack containerized deployment |
+| **Environment Management** | python-dotenv | Secure environment variable handling |
+| **File Upload Handling** | python-multipart, aiofiles | Efficient async upload processing |
+| **HTTP Client** | httpx | Async external API requests |
+| **Deployment Ready** | Dockerized Infrastructure | Portable and reproducible environments |
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-* **Node.js 18+** and **npm**
-* **Python 3.10.x** (⚠️ **Important**: Python 3.14+ is not supported due to package compatibility)
-* **Google Gemini API Key** with billing enabled (Get one at [Google AI Studio](https://aistudio.google.com/apikey))
-* **FFmpeg** (installed on your system path for `yt-dlp` video processing)
+Lumina can be run either:
+- locally using Python + Node.js
+- or using Docker (recommended)
 
-### 1. Clone the Repository
+---
+
+# 📋 Prerequisites
+
+### For Local Development
+* **Node.js 20+** and **npm**
+* **Python 3.10.x**
+* **Google Gemini API Key** with billing enabled  
+  Get one at: https://aistudio.google.com/apikey
+* **FFmpeg** installed and added to system PATH
+* **Docker Desktop** *(optional but recommended)*
+
+---
+
+# 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/YOUR_USERNAME/Lumina.git
 cd Lumina
 ```
 
-### 2. Backend Setup
+---
+
+# 🐳 Option 1 — Run with Docker (Recommended)
+
+This is the easiest and recommended setup.
+
+### Start the Full Application
+
+```bash
+docker compose up --build
+```
+
+### Access the App
+
+| Service | URL |
+| :--- | :--- |
+| Frontend | `http://localhost:3000` |
+| Backend API | `http://localhost:8000` |
+| API Docs | `http://localhost:8000/docs` |
+
+---
+
+### Stop Containers
+
+```bash
+docker compose down
+```
+
+---
+
+### Rebuild Containers
+
+```bash
+docker compose up --build
+```
+
+---
+
+### Why Docker?
+
+✅ One-command setup  
+✅ No virtual environment issues  
+✅ Fully reproducible environment  
+✅ Frontend + backend containerized  
+✅ Easier deployment and collaboration  
+
+---
+
+# 💻 Option 2 — Local Development Setup
+
+---
+
+## 2️⃣ Backend Setup
+
 ```bash
 cd backend
 
-# Use Python 3.10.x (recommended: 3.10.12)
-# If using pyenv: pyenv local 3.10.12
-python3.10 -m venv venv
+# Create virtual environment
+python -m venv venv
 
 # Activate virtual environment
+
 # Windows:
 venv\Scripts\activate
+
 # Mac/Linux:
 source venv/bin/activate
 
 # Install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
+```
 
-# Configure environment variables
-cp .env.example .env
-# Edit .env and add your Gemini API key:
-# GEMINI_API_KEY=your_actual_api_key_here
+---
 
-# Start the FastAPI server
+### Configure Environment Variables
+
+Create `.env` inside `backend/`
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+UPLOAD_DIR=./uploads
+MAX_FILE_SIZE_MB=500
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+LOG_LEVEL=INFO
+```
+
+---
+
+### Start Backend Server
+
+```bash
 uvicorn main:app --reload --port 8000
 ```
 
-The backend will be available at `http://localhost:8000`
+Backend runs on:
 
-### 3. Frontend Setup
+```text
+http://localhost:8000
+```
+
+---
+
+## 3️⃣ Frontend Setup
+
 ```bash
-# In a new terminal
 cd frontend
 
 # Install dependencies
 npm install
+```
 
-# (Optional) Configure API URL
-cp .env.example .env.local
-# Default: NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api
+---
 
-# Start the Next.js development server
+### Configure Frontend Environment
+
+Create `.env.local`
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api
+```
+
+---
+
+### Start Frontend
+
+```bash
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:3000`
+Frontend runs on:
 
-### 4. Start Learning!
-1. Open `http://localhost:3000` in your browser
-2. Paste a YouTube URL or upload a video file
-3. Wait for Gemini to analyze the content (1-3 minutes)
-4. Explore your interactive 3D skill tree!
+```text
+http://localhost:3000
+```
+
+---
+
+# 🎯 Start Learning
+
+1. Open `http://localhost:3000`
+2. Paste a YouTube URL OR upload:
+   - videos
+   - PDFs
+   - handwritten notes
+   - images
+3. Wait for AI processing
+4. Explore:
+   - 3D skill tree
+   - flashcards
+   - quizzes
+   - semantic prioritization
+   - smart study planner
+
+---
+
+# 📂 Supported Input Formats
+
+| Type | Formats |
+| :--- | :--- |
+| Video | MP4, MOV, WebM |
+| Documents | PDF |
+| Images | JPG, PNG, WEBP |
+| URLs | YouTube Links |
+
+---
+
+# ⚡ Processing Pipeline
+
+Lumina processes content in real-time through:
+
+```text
+Downloading → OCR/Transcription → AI Analysis → Course Generation → Skill Tree Rendering
+```
+
+---
+
+# 🧠 Smart Study Planning
+
+Users can:
+- add upcoming test dates
+- enter topics
+- automatically prioritize relevant courses
+
+Courses dynamically highlight based on urgency and semantic relevance.
 
 ---
 
@@ -277,39 +538,179 @@ The frontend will be available at `http://localhost:3000`
 
 | Method | Path | Description |
 | :--- | :--- | :--- |
-| `POST` | `/api/process/youtube` | Initiates background job to download and process a YT URL |
-| `POST` | `/api/process/upload` | Uploads raw MP4 directly into the Gemini processing pipeline |
-| `GET` | `/api/status/{job_id}` | Polls specific job status (Downloading $\rightarrow$ Analyzing $\rightarrow$ Gen) |
-| `GET` | `/api/jobs` | Retrieves history of all active and completed Generation Jobs |
+| `POST` | `/api/process/youtube` | Initiates asynchronous processing for a YouTube lecture URL |
+| `POST` | `/api/process/upload` | Uploads videos, PDFs, handwritten notes, or images into the AI pipeline |
+| `GET` | `/api/status/{job_id}` | Retrieves detailed processing state (`Downloading → OCR → Analyzing → Generating → Finalizing`) |
+| `GET` | `/api/progress/{job_id}` | Polls real-time progress updates for active processing jobs |
+| `GET` | `/api/jobs` | Returns all active, completed, and failed generation jobs |
+| `GET` | `/api/course/{job_id}/flashcards` | Fetches generated flashcards for a course or concept |
+| `GET` | `/api/course/{job_id}/quiz` | Retrieves adaptive quiz questions and explanations |
+| `DELETE` | `/api/course/{job_id}` | Deletes unwanted or failed courses from the library |
+
 
 ---
 
 ## 🎯 How It Works
 
-1. **User Provides Video**: User pastes a YouTube link or uploads a raw MP4.
-2. **Backend Intercepts**: FastAPI immediately returns a `job_id` to the frontend and begins an `asyncio` background task.
-3. **Download / Ingestion**: `yt-dlp` extracts the best available transcript. If video processing is requested, it downloads the video file.
-4. **Gemini Initialization**: The file or transcript is uploaded to Gemini 3.0 Flash along with a massive system prompt demanding rigid Pydantic JSON structures.
-5. **Generation**: Gemini acts as an orchestrator, outputting a complete `CourseModule` containing strictly mapped concepts, flashcards, and quizzes.
-6. **3D Render**: The frontend receives the JSON. The `SkillTreeScene` maps the concepts. Custom force-physics pushes siblings apart and pulls children to parents.
-7. **Active Learning**: The user interacts with the flashcards and quizzes tied explicitly to a concept node.
-8. **Mastery Tracking**: As the user answers quizzes correctly, `zustand` updates the mastery integer, which directly updates the glowing emissive material built into the Three.js mesh.
+1. **User Uploads Learning Material**  
+   Users can:
+   - paste a YouTube URL
+   - upload lecture videos
+   - upload PDFs
+   - upload handwritten notes or images
 
+---
+
+2. **Backend Initializes Async Processing**  
+   FastAPI immediately returns a `job_id` while launching asynchronous background processing tasks to keep the UI responsive.
+
+---
+
+3. **Content Extraction Pipeline**
+
+### 🎬 Video & YouTube Processing
+- `yt-dlp` downloads:
+  - video
+  - audio
+  - transcripts
+
+### 📝 OCR Processing
+- EasyOCR extracts handwritten and printed text from:
+  - PDFs
+  - notes
+  - images
+
+---
+
+4. **Multimodal Gemini Analysis**  
+   Extracted content is passed into **Gemini 3.0 Flash**, where the model simultaneously processes:
+   - spoken explanations
+   - slides
+   - diagrams
+   - handwritten content
+   - transcripts
+   - visual context
+
+Gemini receives a highly structured prompt demanding strict Pydantic JSON outputs.
+
+---
+
+5. **Structured Course Generation**  
+   Gemini generates a complete structured learning module containing:
+
+- hierarchical concepts
+- prerequisite relationships
+- timestamps
+- categorized flashcards
+- adaptive quizzes
+- mastery metadata
+- semantic tags
+
+---
+
+6. **Semantic Processing Layer**  
+   Lumina analyzes:
+   - course titles
+   - concepts
+   - aliases
+   - extracted topics
+
+to intelligently associate related study material.
+
+This powers:
+- semantic matching
+- smart prioritization
+- deadline-aware highlighting
+
+---
+
+7. **3D Skill Tree Rendering**  
+   The frontend dynamically renders concepts into an interactive Three.js-powered skill tree where:
+   - parent-child dependencies are visualized
+   - nodes react to mastery progression
+   - prerequisite paths become explorable
+
+---
+
+8. **Interactive Learning Experience**
+
+Users interact through:
+- flashcards
+- quizzes
+- concept exploration
+- timestamp navigation
+
+to actively reinforce learning.
+
+---
+
+9. **Smart Study Planning**
+
+Users can:
+- add upcoming test topics
+- assign deadlines
+
+Lumina automatically:
+- matches relevant courses
+- prioritizes important concepts
+- highlights urgent study material
+
+---
+
+10. **Real-Time Progress Tracking**
+
+The UI updates dynamically through multiple stages:
+
+```text
+Downloading → OCR → Analyzing → Generating → Finalizing
+```
+
+Users can monitor active processing directly from the smart course library.
+
+---
+
+11. **Mastery Tracking & Persistence**
+
+As quizzes are completed:
+- mastery states update in real-time
+- nodes visually evolve
+- progress persists through SQLite + local state storage
+
+This transforms Lumina from:
+```text
+passive content consumption
+```
+
+into:
+```text
+interactive adaptive learning
+```
 ---
 
 ## 🌍 Real-World Impact
 
-* **Democratizing Education**: 500M+ students utilize YouTube for education. Lumina transforms passive free content into premium, interactive courseware. Unlike simple chatbots, Lumina actually builds tangible, progressive learning paths.
-* **Saving Time**: Reduces pure note-taking and flashcard-creation study time by 60-80%. Students spend time *studying*, not *preparing to study*.
-* **Accessibility**: Helps neurodivergent learners, particularly those with ADHD, who struggle immensely with unstructured, long-form video content by gamifying the learning process into an interactive tree with immediate visual feedback.
-* **Empowering Educators**: Professors and YouTubers can use Lumina to instantly auto-generate entire companion courses for their 1-hour lectures.
+- **🎓 Democratizing Education**  
+  Lumina transforms free educational content from YouTube, PDFs, and handwritten notes into structured, interactive learning experiences.
 
+- **⏳ Saving Study Time**  
+  Automates note-making, flashcards, quizzes, and topic organization — reducing study preparation time by **60–80%**.
+
+- **🧠 Smarter Learning**  
+  Uses AI-powered semantic matching and deadline-aware prioritization to help students focus on the most important topics first.
+
+- **♿ Improved Accessibility**  
+  Supports multiple learning formats including videos, PDFs, images, and handwritten notes, making learning more inclusive and flexible.
+
+- **👩‍🏫 Empowering Educators**  
+  Enables teachers and creators to instantly convert lectures into interactive AI-powered study systems.
+
+- **🚀 Personalized Learning**  
+  Moves beyond passive content consumption by creating adaptive, prerequisite-aware learning paths tailored to the student.
 ---
 
 ## 🔮 Future Roadmap
 
 * **Spaced Repetition Engine**: Introducing a timed scheduling algorithm (like Anki) to notify the user when a concept's "Mastery" starts decaying over weeks of inactivity.
-* **Multi-modal Ingestion Expansion**: Extending ingestion beyond just YouTube to process raw PDF textbooks, PowerPoint Slides, and Notion docs.
 * **Multiplayer Skill Trees**: Allowing students in the same university class to share the same Skill Tree and compete to master the nodes fastest.
 * **LMS Integration**: Export pipelines for Canvas and Moodle.
 * **Mobile Port**: Rewriting the Three.js layer in React Native for iOS/Android native experiences.
@@ -329,5 +730,5 @@ Distributed under the MIT License.
 
 ---
 <div align="center">
-  <b>Built with ❤️ for the PIXEL.GEMINI Hackathon</b>
+  <b>Built with ❤️</b>
 </div>
