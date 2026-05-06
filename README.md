@@ -28,7 +28,7 @@ Students worldwide waste hours watching lengthy lecture recordings and reading d
 
 ## ✨ The Solution
 
-**Lumina** is an AI-powered platform where a user uploads a lecture video or pastes a YouTube URL. Using Google's Gemini 2.0 Flash multimodal long-context capabilities, the app acts as your personal tutor.
+**Lumina** is an AI-powered platform where a user uploads a lecture video or pastes a YouTube URL. Using Google's Gemini Flash - lite  multimodal long-context capabilities, the app acts as your personal tutor.
 
 Lumina completely transforms the educational pipeline: **2-hour lecture $\rightarrow$ 20-minute interactive study session.**
 
@@ -224,7 +224,7 @@ User
                ┌─────────────────┼─────────────────┐
                ▼                 ▼                 ▼
        ┌────────────┐    ┌──────────────┐   ┌────────────┐
-       │   yt-dlp   │    │   EasyOCR    │   │ Gemini 3.0 │
+       │   yt-dlp   │    │   EasyOCR    │   │  Gemini    │
        │ Transcript │    │ Handwriting  │   │   Flash    │
        │ & Video    │    │ Extraction   │   │ Multimodal │
        │ Extraction │    └──────────────┘   │  Analysis  │
